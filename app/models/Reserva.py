@@ -6,10 +6,8 @@ from .Carro import Carro
 
 class Reserva(models.Model):
     id = models.AutoField(primary_key=True)
-    data_inicio = models.DateField(blank=False, null=False)
-    data_fim = models.DateField(blank=False, null=False)
-    hora_inicio = models.TimeField(blank=False, null=False)
-    hora_fim = models.TimeField(blank=False, null=False)
+    data_inicio = models.DateTimeField(blank=False, null=False)
+    data_fim = models.DateTimeField(blank=False, null=False)
     carro = models.ForeignKey(Carro, on_delete=models.CASCADE)
     motorista = models.ForeignKey(Motorista, on_delete=models.CASCADE)
     
