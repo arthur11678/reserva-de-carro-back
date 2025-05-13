@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('carro', views.CarroView.as_view({'get': 'list', 'post': 'create'}), name="carro"),
+    path('carro/<int:pk>', views.CarroView.as_view({'get': 'retrieve'})),
+    path('carro/carros_livres', views.CarroView.as_view({'get': 'carros_livres'})),
+    path('motorista', views.MotoristaView.as_view({"get": "list", "post": "create"})),
+    path('motorista/<int:pk>', views.MotoristaView.as_view({"get": "retrieve"})),
+    path('reserva', views.ReservaView.as_view({'get': 'list', 'post': 'create'})),
+    path('reserva/<int:pk>', views.ReservaView.as_view({'get': 'retrieve', 'delete': 'destroy', 'patch': 'update', 'put': 'update'}))
 ]
