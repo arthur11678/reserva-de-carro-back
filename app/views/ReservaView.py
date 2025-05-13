@@ -1,4 +1,3 @@
-import pytz
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -16,40 +15,8 @@ class ReservaView(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.Destr
     permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
-        data_inicio = datetime.strptime(request.data['data_inicio'], '%d/%m/%Y %H:%M').replace(tzinfo=pytz.timezone("America/Sao_Paulo"))
-        data_fim = datetime.strptime(request.data['data_fim'], '%d/%m/%Y %H:%M').replace(tzinfo=pytz.timezone("America/Sao_Paulo"))
-        carro = Carro.objects.get(id=request.data['carro'])
-        motorista = Motorista.objects.get(id=request.data['motorista'])
-        if ReservaHelper.existe_reserva(data_inicio, data_fim, carro, motorista):
-            return Response(status=400, data={"message": "Já existe uma reserva para este carro ou motorista nesta data"})
-        reserva = Reserva.objects.create(data_inicio=data_inicio, data_fim=data_fim, carro=carro, motorista=motorista)
-        return Response(ReservaSerializer(reserva, many=False).data)
+        return ReservaHelper.cria_reserva(request.data)
 
     def update(self, request, pk, *args, **kwargs):
-        reserva = Reserva.objects.get(id=pk)
-        try:
-            data_inicio = datetime.strptime(request.data['data_inicio'], '%d/%m/%Y_%H:%M')
-            reserva.data_inicio = data_inicio
-        except:
-            pass
-        
-        try:
-            data_fim = datetime.strptime(request.data['data_fim'], '%d/%m/%Y_%H:%M')
-            reserva.data_fim = data_fim
-        except:
-            pass
-        
-        try:
-            carro = Carro.objects.get(id=request.data['carro'])
-            reserva.carro = carro
-        except:
-            pass
-        
-        try:
-            motorista = Motorista.objects.get(id=request.data['motorista'])
-            reserva.motorista = motorista
-        except:
-            pass
-        
-        reserva.save()
+        reserva = ReservaHelper.atualiza_reserva(pk, request.data)
         return Response(ReservaSerializer(reserva, many=False).data)
