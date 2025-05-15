@@ -8,8 +8,8 @@ class CarroHelper:
     
     @classmethod
     def carros_livres(cls, params):
-        data_inicio = datetime.strptime(params.get("data_inicio"), '%d/%m/%Y_%H:%M')
-        data_fim = datetime.strptime(params.get("data_fim"), '%d/%m/%Y_%H:%M')
+        data_inicio = datetime.fromtimestamp(params.get("data_inicio"))
+        data_fim = datetime.fromtimestamp(params.get("data_fim"))
         carros_com_reserva_conflitante = Reserva.objects.filter(
             Q(data_inicio__lte=data_fim) & Q(data_fim__gte=data_inicio)
         ).values_list('carro_id', flat=True)
