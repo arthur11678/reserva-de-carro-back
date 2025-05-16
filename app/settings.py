@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'reserva_de_carro',
-        'USER': 'postgres',
+        'USER': 'pi',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': '5432',
