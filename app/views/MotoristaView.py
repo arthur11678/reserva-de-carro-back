@@ -16,7 +16,7 @@ class MotoristaView(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.Lis
             motorista = Motorista.objects.get(nome=request.data['nome'])
             return Response(status=400, data={"message": "Já existe um motorista com esse nome"})
         except:
-            motorista = Motorista.objects.create(nome=request.data['nome'])
+            motorista = Motorista.objects.create(nome=request.data['nome'], cor=request.data['cor'])
             motorista.save()
             return Response(MotoristaSerializer(motorista, many=False).data)
     

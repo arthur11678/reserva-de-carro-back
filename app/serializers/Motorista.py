@@ -5,4 +5,4 @@ class MotoristaSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Motorista
-        fields = ("id", "nome")
+        fields = ("id", "nome", "cor")
