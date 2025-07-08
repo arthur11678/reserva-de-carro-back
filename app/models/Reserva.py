@@ -12,7 +12,7 @@ class Reserva(models.Model):
     motorista = models.ForeignKey(Motorista, on_delete=models.CASCADE)
     
     def __str__(self):
-        return str(self.id)
+        return str(self.id) + " - " +  self.motorista.nome + " - " + self.carro.nome
     
     class Meta:
         db_table = "reserva"

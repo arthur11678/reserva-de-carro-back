@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8rhlgl2sb4s_3yzwhi)3++jc=3y3d$62vf5@5apf@k(zh8&ghp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*", "http://localhost:5173", "http://localhost:8000"]
 
@@ -82,17 +82,26 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.environ.get("POSTGRES_DB"),
+#        'USER': os.environ.get("POSTGRES_USER"),
+#        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+#        'HOST': os.environ.get("POSTGRES_CONTAINER_NAME"),
+#        'PORT': os.environ.get("POSTGRES_PORT"),
+#    }
+#}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("POSTGRES_DB"),
-        'USER': os.environ.get("POSTGRES_USER"),
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': os.environ.get("POSTGRES_CONTAINER_NAME"),
-        'PORT': os.environ.get("POSTGRES_PORT"),
+        'NAME': "reserva",
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': "localhost",
+        'PORT': "5432",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

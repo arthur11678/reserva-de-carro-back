@@ -20,8 +20,8 @@ class ReservaHelper:
     
     @classmethod
     def cria_reserva(cls, data):
-        data_inicio = datetime.fromtimestamp(data['data_inicio'])
-        data_fim = datetime.fromtimestamp(data['data_fim'])
+        data_inicio = datetime.fromtimestamp(int(data['data_inicio']))
+        data_fim = datetime.fromtimestamp(int(data['data_fim']))
         carro = Carro.objects.get(id=data['carro'])
         motorista = Motorista.objects.get(id=data['motorista'])
         if cls.existe_reserva(data_inicio, data_fim, carro, motorista):
@@ -33,13 +33,13 @@ class ReservaHelper:
     def atualiza_reserva(cls, id, data):
         reserva = Reserva.objects.get(id=id)
         try:
-            data_inicio = datetime.fromtimestamp(data['data_inicio'])
+            data_inicio = datetime.fromtimestamp(int(data['data_inicio']))
             reserva.data_inicio = data_inicio
         except:
             pass
         
         try:
-            data_fim = datetime.fromtimestamp(data['data_fim'])
+            data_fim = datetime.fromtimestamp(int(data['data_fim']))
             reserva.data_fim = data_fim
         except:
             pass
